@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة سائق الدراجة</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="tel"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .messages {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        .reply {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #d1ecf1;
+            border-radius: 4px;
+        }
+        .reply-form {
+            margin-top: 10px;
+        }
+        .reply-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .reply-form button {
+            background-color: #17a2b8;
+        }
+        .reply-form button:hover {
+            background-color: #138496;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>تقديم طلبية</h1>
+    <form id="orderForm">
+        <label for="name">الاسم اللقب:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="address">العنوان:</label>
+        <input type="text" id="address" name="address" required>
+
+        <label for="phone">رقم الهاتف:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="order">تفاصيل الطلبية:</label>
+        <textarea id="order" name="order" rows="4" required></textarea>
+
+        <button type="submit">إرسال الطلبية</button>
+    </form>
+
+    <div class="messages">
+        <h2>الرسائل والردود</h2>
+        <div id="messageArea"></div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('orderForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const address = document.getElementById('address').value;
+        const phone = document.getElementById('phone').value;
+        const order = document.getElementById('order').value;
+
+        const messageArea = document.getElementById('messageArea');
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message');
+        messageDiv.innerHTML = `
+            <strong>${name}</strong>: ${order}<br>
+            <small>العنوان: ${address}, الهاتف: ${phone}</small>
+            <div class="reply-form">
+                <textarea placeholder="اكتب ردك هنا..."></textarea>
+                <button type="button" onclick="sendReply(this)">إرسال الرد</button>
+            </div>
+            <div class="replies"></div>
+        `;
+        messageArea.appendChild(messageDiv);
+
+        // مسح الحقول بعد الإرسال
+        document.getElementById('orderForm').reset();
+    });
+
+    function sendReply(button) {
+        const replyText = button.previousElementSibling.value; // النص المكتوب في حقل الرد
+        if (replyText.trim() === "") {
+            alert("الرجاء كتابة رد قبل الإرسال.");
+            return;
+        }
+
+        const repliesDiv = button.parentElement.nextElementSibling; // قسم الردود
+        const replyDiv = document.createElement('div');
+        replyDiv.classList.add('reply');
+        replyDiv.textContent = `الرد: ${replyText}`;
+        repliesDiv.appendChild(replyDiv);
+
+        // مسح حقل الرد بعد الإرسال
+        button.previousElementSibling.value = "";
+    }
+</script>
+
+</body>
+    <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إرسال رسالة واتساب</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #25D366; /* لون واتساب */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #128C7E; /* لون واتساب داكن */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>إرسال رسالة واتساب</h1>
+
+    <!-- حقل لإدخال الرسالة -->
+    <label for="message">اكتب رسالتك:</label>
+    <textarea id="message" rows="4" placeholder="اكتب رسالتك هنا..."></textarea>
+
+    <!-- زر الإرسال -->
+    <button onclick="sendWhatsAppMessage()">إرسال عبر واتساب</button>
+</div>
+
+<script>
+    function sendWhatsAppMessage() {
+        // الحصول على النص من حقل الرسالة
+        const message = document.getElementById('message').value;
+
+        // التحقق من أن الرسالة ليست فارغة
+        if (message.trim() === "") {
+            alert("الرجاء كتابة رسالة قبل الإرسال.");
+            return;
+        }
+
+        // رقم الهاتف الافتراضي (يمكن تغييره)
+        const phoneNumber = "+213667705976"; // استبدل برقم الهاتف المطلوب
+
+        // تشفير الرسالة لاستخدامها في الرابط
+        const encodedMessage = encodeURIComponent(message);
+
+        // إنشاء رابط واتساب
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+        // فتح الرابط في نافذة جديدة
+        window.open(whatsappUrl, '_blank');
+    }
+</script>
+
+</body>
+</html>
+  </html>
